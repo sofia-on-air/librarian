@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1083</width>
-    <height>683</height>
+    <width>1122</width>
+    <height>724</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Библиотекарь</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1081</width>
-     <height>681</height>
+     <width>1121</width>
+     <height>721</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
