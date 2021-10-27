@@ -16,10 +16,10 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1121</width>
-     <height>771</height>
+     <x>10</x>
+     <y>10</y>
+     <width>1101</width>
+     <height>751</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -77,7 +77,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableView" name="booksWidget"/>
+       <widget class="QTableWidget" name="booksWidget"/>
       </item>
      </layout>
     </item>
