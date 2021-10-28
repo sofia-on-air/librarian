@@ -1,30 +1,45 @@
-import sys
 import sqlite3
 
 from PyQt5 import QtCore, uic  # Импортируем uic
-from PyQt5.QtWidgets import QMessageBox, QTableWidget, QTableWidgetItem, QWidget
+from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QWidget, QTableWidget, QAbstractItemView
+
+from MessageBox import show_warning
+from bookForm import BookForm
 
 
 class MainFormWidget(QWidget):
+    book_form = None
+
     def __init__(self):
         super().__init__()
         uic.loadUi('MainForm.ui', self)  # Загружаем дизайн
+        # Отключаем кнопки минимизации и разворачивания
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMinimizeButtonHint)
-        # self.loginButton.clicked.connect(self.login_click)
-        self.showBooks()
 
-    def showBooks(self):
+        self.searchButton.clicked.connect(self.search_click)
+        self.addButton.clicked.connect(self.add_click)
+        # По двойному щелчку будет редактирование
+        self.booksWidget.cellDoubleClicked.connect(self.edit_book)
+        # Редактирование самой таблицы запретим
+        self.booksWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        # Показываем список
+        self.show_books()
+
+    def show_books(self):
+        # Параметры поиска
+        title = '%' + self.titleEdit.text() + '%'
+        author = '%' + self.authorEdit.text() + '%'
         # Подключение к БД
         con = sqlite3.connect('librarian.sqlite')
-        # Создание курсора
         cur = con.cursor()
-        # Выполнение запроса и получение всех результатов
         result = cur.execute("""SELECT Id, Title, Author, Count, Place
-            FROM books""").fetchall()
+            FROM books
+            WHERE Title LIKE ? AND Author LIKE ?""", (title, author)).fetchall()
         # Заполним размеры таблицы
         self.booksWidget.setColumnCount(5)
         self.booksWidget.setRowCount(0)
+        # Заполним заголовки столбцов
         self.booksWidget.setHorizontalHeaderItem(0, QTableWidgetItem(str('Номер')))
         self.booksWidget.setHorizontalHeaderItem(1, QTableWidgetItem(str('Название')))
         self.booksWidget.setHorizontalHeaderItem(2, QTableWidgetItem(str('Автор')))
@@ -37,39 +52,30 @@ class MainFormWidget(QWidget):
             for j, elem in enumerate(row):
                 self.booksWidget.setItem(i, j, QTableWidgetItem(str(elem)))
         con.close()
+        # Если не нашли ни одной книги, показываем ошибку
+        if len(result) == 0:
+            show_warning(self, 'Книг по вашему критерию не найдено.\nПопробуйте исправить критерии поиска.')
 
-    # def login_click(self):
-    #     login = self.loginEdit.text()
-    #     password = self.passwordEdit.text()
-    #     if login == '' or password == '':
-    #         dlg = QMessageBox(self)
-    #         dlg.setWindowTitle("Ошибка")
-    #         dlg.setText("Логин и пароль должны быть введены!")
-    #         dlg.setStandardButtons(QMessageBox.Ok)
-    #         dlg.setIcon(QMessageBox.Critical)
-    #         dlg.exec()
-    #         return
+    def search_click(self):
+        # Перезагружаем список книг, если есть критерии поиска
+        self.show_books()
 
-    #     # Подключение к БД
-    #     con = sqlite3.connect('librarian.sqlite')
-    #     # Создание курсора
-    #     cur = con.cursor()
-    #     # Выполнение запроса и получение всех результатов
-    #     result = cur.execute("""SELECT id
-    #         FROM users
-    #         WHERE login = ? AND password = ?""", (login, password)).fetchall()
-    #     if len(result) > 0:
-    #         self.logged = True
-    #     else:
-    #         self.logged = False
-    #     con.close()
-    #     if self.logged:
-    #         self.close()
-    #         return
-    #     else:
-    #         dlg = QMessageBox(self)
-    #         dlg.setWindowTitle("Ошибка")
-    #         dlg.setText("Пользователь с таким логином и паролем не найден!")
-    #         dlg.setStandardButtons(QMessageBox.Ok)
-    #         dlg.setIcon(QMessageBox.Critical)
-    #         dlg.exec()
+    def add_click(self):
+        self.book_form = BookForm(0)
+        result = self.book_form.exec()
+        # Если что-то сделали, нужно перезагрузить список книг
+        if result == QMessageBox.Ok:
+            self.show_books()
+
+    def edit_book(self, row, column):
+        # Достанем данные книги из таблицы
+        book_id = int(self.booksWidget.item(row, 0).text())
+        title = self.booksWidget.item(row, 1).text()
+        author = self.booksWidget.item(row, 2).text()
+        count = int(self.booksWidget.item(row, 3).text())
+        place = self.booksWidget.item(row, 4).text()
+        self.book_form = BookForm(book_id, author, title, count, place)
+        result = self.book_form.exec()
+        # Если что-то сделали, нужно перезагрузить список книг
+        if result == QMessageBox.Ok:
+            self.show_books()

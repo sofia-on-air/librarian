@@ -10,10 +10,22 @@
     <height>772</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1122</width>
+    <height>772</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1122</width>
+    <height>772</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Библиотекарь</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
