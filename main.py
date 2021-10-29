@@ -5,7 +5,7 @@ from PyQt5 import QtCore, uic  # Импортируем uic
 from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget
 
 from MessageBox import show_error
-from mainForm import MainFormWidget
+from mainForm import MainForm
 
 
 class LoginWidget(QWidget):
@@ -41,7 +41,7 @@ class LoginWidget(QWidget):
         if self.logged:
             # Если пользователь есть, открыть основное окно
             self.hide()
-            self.main_window = MainFormWidget()
+            self.main_window = MainForm()
             self.main_window.show()
             return
         else:

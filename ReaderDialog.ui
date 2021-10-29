@@ -6,18 +6,30 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>283</height>
+    <width>632</width>
+    <height>299</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>632</width>
+    <height>299</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>632</width>
+    <height>299</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>10</x>
+     <y>10</y>
      <width>611</width>
      <height>281</height>
     </rect>

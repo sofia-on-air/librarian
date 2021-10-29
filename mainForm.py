@@ -1,14 +1,16 @@
 import sqlite3
 
 from PyQt5 import QtCore, uic  # Импортируем uic
-from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QWidget, QTableWidget, QAbstractItemView
+from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QWidget, QAbstractItemView
 
 from MessageBox import show_warning
 from bookForm import BookForm
+from readersForm import ReadersForm
 
 
-class MainFormWidget(QWidget):
+class MainForm(QWidget):
     book_form = None
+    readers_form = None
 
     def __init__(self):
         super().__init__()
@@ -17,8 +19,9 @@ class MainFormWidget(QWidget):
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMinimizeButtonHint)
 
-        self.searchButton.clicked.connect(self.search_click)
+        self.searchButton.clicked.connect(self.show_books)
         self.addButton.clicked.connect(self.add_click)
+        self.readersButton.clicked.connect(self.readers_click)
         # По двойному щелчку будет редактирование
         self.booksWidget.cellDoubleClicked.connect(self.edit_book)
         # Редактирование самой таблицы запретим
@@ -56,10 +59,6 @@ class MainFormWidget(QWidget):
         if len(result) == 0:
             show_warning(self, 'Книг по вашему критерию не найдено.\nПопробуйте исправить критерии поиска.')
 
-    def search_click(self):
-        # Перезагружаем список книг, если есть критерии поиска
-        self.show_books()
-
     def add_click(self):
         self.book_form = BookForm(0)
         result = self.book_form.exec()
@@ -79,3 +78,7 @@ class MainFormWidget(QWidget):
         # Если что-то сделали, нужно перезагрузить список книг
         if result == QMessageBox.Ok:
             self.show_books()
+
+    def readers_click(self):
+        self.readers_form = ReadersForm()
+        self.readers_form.show()
