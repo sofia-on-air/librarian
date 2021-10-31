@@ -16,7 +16,6 @@ class BookForm(QDialog):
     def __init__(self, book_id, author='', title='', count=0, place=''):
         super().__init__()
         uic.loadUi('BookDialog.ui', self)  # Загружаем дизайн
-        self.book_id = book_id
         self.deleteButton.clicked.connect(self.delete_click)
         self.okButton.clicked.connect(self.ok_click)
         self.cancelButton.clicked.connect(self.cancel_click)

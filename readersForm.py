@@ -21,7 +21,6 @@ class ReadersForm(QWidget):
 
         self.searchButton.clicked.connect(self.show_readers)
         self.addButton.clicked.connect(self.add_click)
-        # self.readersButton.clicked.connect(self.readers_click)
         # По двойному щелчку будет редактирование
         self.readersWidget.cellDoubleClicked.connect(self.edit_reader)
         # Редактирование самой таблицы запретим
