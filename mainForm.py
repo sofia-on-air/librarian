@@ -54,10 +54,10 @@ class MainForm(QWidget):
                 self.booksWidget.rowCount() + 1)
             for j, elem in enumerate(row):
                 self.booksWidget.setItem(i, j, QTableWidgetItem(str(elem)))
-        con.close()
         # Если не нашли ни одной книги, показываем ошибку
         if len(result) == 0:
             show_warning(self, 'Книг по вашему критерию не найдено.\nПопробуйте исправить критерии поиска.')
+        con.close()
 
     def add_click(self):
         self.book_form = BookForm(0)

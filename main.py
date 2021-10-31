@@ -2,6 +2,7 @@ import sys
 import sqlite3
 
 from PyQt5 import QtCore, uic  # Импортируем uic
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget
 
 from MessageBox import show_error
@@ -19,6 +20,8 @@ class LoginWidget(QWidget):
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMinimizeButtonHint)
         self.loginButton.clicked.connect(self.login_click)
+        self.loginEdit.returnPressed.connect(self.login_click)
+        self.passwordEdit.returnPressed.connect(self.login_click)
 
     def login_click(self):
         login = self.loginEdit.text()
