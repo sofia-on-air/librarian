@@ -1,7 +1,7 @@
 import sqlite3
 
-from PyQt5 import QtCore, uic  # Импортируем uic
-from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QDialog, QSpinBox
+from PyQt5 import uic  # Импортируем uic
+from PyQt5.QtWidgets import QMessageBox, QDialog
 
 from MessageBox import show_error
 
@@ -32,6 +32,7 @@ class BookForm(QDialog):
         else:
             # Если это редактирование книги, заполним поля
             self.deleteButton.setEnabled(True)
+            self.deleteButton.setStyleSheet("background-color: pink")
             self.setWindowTitle('Редактирование книги')
             self.authorEdit.setText(author)
             self.titleEdit.setText(title)

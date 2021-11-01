@@ -8,7 +8,7 @@ from bookForm import BookForm
 from readersForm import ReadersForm
 
 
-class MainForm(QWidget):
+class BooksForm(QWidget):
     book_form = None
     readers_form = None
 
@@ -19,9 +19,12 @@ class MainForm(QWidget):
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMinimizeButtonHint)
 
-        self.searchButton.clicked.connect(self.show_books)
         self.addButton.clicked.connect(self.add_click)
         self.readersButton.clicked.connect(self.readers_click)
+        self.searchButton.clicked.connect(self.show_books)
+        # По нажатию на enter пытаемся искать
+        self.titleEdit.returnPressed.connect(self.show_books)
+        self.authorEdit.returnPressed.connect(self.show_books)
         # По двойному щелчку будет редактирование
         self.booksWidget.cellDoubleClicked.connect(self.edit_book)
         # Редактирование самой таблицы запретим
