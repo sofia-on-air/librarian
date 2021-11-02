@@ -14,7 +14,7 @@ class BooksForm(QWidget):
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('MainForm.ui', self)  # Загружаем дизайн
+        uic.loadUi('BooksForm.ui', self)  # Загружаем дизайн
         # Отключаем кнопки минимизации и разворачивания
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMaximizeButtonHint)
         self.setWindowFlags(self.windowFlags() & ~QtCore.Qt.WindowMinimizeButtonHint)

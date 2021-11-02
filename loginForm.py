@@ -4,7 +4,7 @@ from PyQt5 import QtCore, uic  # Импортируем uic
 from PyQt5.QtWidgets import QWidget
 
 from MessageBox import show_error
-from mainForm import BooksForm
+from booksForm import BooksForm
 
 
 class LoginWidget(QWidget):
