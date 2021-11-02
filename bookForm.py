@@ -3,7 +3,7 @@ import sqlite3
 from PyQt5 import uic  # Импортируем uic
 from PyQt5.QtWidgets import QMessageBox, QDialog
 
-from MessageBox import show_error
+from MessageBox import show_error, show_question
 
 
 class BookForm(QDialog):
@@ -41,12 +41,7 @@ class BookForm(QDialog):
 
     def delete_click(self):
         # Подтверждение удаления
-        dlg = QMessageBox(self)
-        dlg.setWindowTitle("Удалить?")
-        dlg.setText("Вы уверены, что хотите удалить книгу?")
-        dlg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        dlg.setIcon(QMessageBox.Question)
-        result = dlg.exec()
+        result = show_question(self, 'Вы уверены, что хотите удалить книгу?', 'Удалить?')
         if result == QMessageBox.Yes:
             # Подключение к БД
             con = sqlite3.connect('librarian.sqlite')
@@ -72,6 +67,7 @@ class BookForm(QDialog):
         if result:
             self.done(QMessageBox.Ok)
 
+    # Проверка заполненности полей формы
     def is_book_ok(self):
         if self.titleEdit.text() == '':
             show_error(self, 'Название книги отсутствует')

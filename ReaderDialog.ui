@@ -25,7 +25,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>11</x>
@@ -85,7 +85,7 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="adressEdit"/>
+       <widget class="QLineEdit" name="addressEdit"/>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="tel_numberLabel">
@@ -95,7 +95,7 @@
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QLineEdit" name="tel_numberEdit"/>
+       <widget class="QLineEdit" name="phoneEdit"/>
       </item>
      </layout>
     </item>

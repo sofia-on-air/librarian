@@ -15,3 +15,12 @@ def show_warning(parent, text):
     dlg.setStandardButtons(QMessageBox.Ok)
     dlg.setIcon(QMessageBox.Warning)
     dlg.exec()
+
+def show_question(parent, text, title):
+    dlg = QMessageBox(parent)
+    dlg.setWindowTitle(title)
+    dlg.setText(text)
+    dlg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+    dlg.setIcon(QMessageBox.Question)
+    result = dlg.exec()
+    return result
