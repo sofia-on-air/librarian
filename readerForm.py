@@ -4,7 +4,9 @@ from PyQt5 import uic
 from PyQt5.QtCore import QDate  # Импортируем uic
 from PyQt5.QtWidgets import QMessageBox, QDialog
 
-from MessageBox import show_error, show_question
+from MessageBox import show_error, show_question, show_info
+from giveBookForm import GiveBookForm
+from returnBookForm import ReturnBookForm
 
 
 class ReaderForm(QDialog):
@@ -15,15 +17,18 @@ class ReaderForm(QDialog):
     birth_date = ''
     home_address = 0
     phone_number = ''
+    give_book_form = None
+    return_book_form = None
 
-    def __init__(self, reader_id, name='', surname='', patronymic_name='', birth_date='', home_address='', phone_number=''):
+    def __init__(self, reader_id, name='', surname='', patronymic_name='', birth_date='', home_address='',
+                 phone_number=''):
         super().__init__()
         uic.loadUi('ReaderDialog.ui', self)  # Загружаем дизайн
         self.deleteButton.clicked.connect(self.delete_click)
         self.okButton.clicked.connect(self.ok_click)
         self.cancelButton.clicked.connect(self.cancel_click)
-        # self.giveButton.clicked.connect(self.give_click)
-        # self.returnButton.clicked.connect(self.return_click)
+        self.giveButton.clicked.connect(self.give_click)
+        self.returnButton.clicked.connect(self.return_click)
         # Исправим формат отображения даты
         self.dateEdit.setDisplayFormat('yyyy-MM-dd')
         # Запомним начальные значения
@@ -113,7 +118,8 @@ class ReaderForm(QDialog):
         # Добавляем книгу
         cur.execute("""INSERT INTO readers
             (Name, Surname, PatronymicName, BirthDate, HomeAddress, PhoneNumber)
-            VALUES (?, ?, ?, ?, ?, ?)""", (self.name, self.surname, self.patronymic_name, self.birth_date, self.home_address, self.phone_number)).fetchall()
+            VALUES (?, ?, ?, ?, ?, ?)""", (self.name, self.surname, self.patronymic_name, self.birth_date,
+                                           self.home_address, self.phone_number)).fetchall()
         con.commit()
         con.close()
         return True
@@ -150,3 +156,15 @@ class ReaderForm(QDialog):
             con.commit()
             con.close()
         return True
+
+    def give_click(self):
+        self.give_book_form = GiveBookForm(self.reader_id)
+        result = self.give_book_form.exec()
+        if result == QMessageBox.Ok:
+            show_info(self, 'Книга выдана', 'Информация')
+
+    def return_click(self):
+        self.return_book_form = ReturnBookForm(self.reader_id)
+        result = self.return_book_form.exec()
+        if result == QMessageBox.Ok:
+            show_info(self, 'Книга сдана', 'Информация')

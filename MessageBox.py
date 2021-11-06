@@ -24,3 +24,11 @@ def show_question(parent, text, title):
     dlg.setIcon(QMessageBox.Question)
     result = dlg.exec()
     return result
+
+def show_info(parent, text, title):
+    dlg = QMessageBox(parent)
+    dlg.setWindowTitle(title)
+    dlg.setText(text)
+    dlg.setStandardButtons(QMessageBox.Ok)
+    dlg.setIcon(QMessageBox.Information)
+    dlg.exec()
