@@ -73,5 +73,3 @@ class StatForm(QDialog):
             for j, elem in enumerate(row):
                 self.booksWidget.setItem(i, j, QTableWidgetItem(str(elem)))
         con.close()
-
-

@@ -78,4 +78,3 @@ class ReadersForm(QWidget):
         # Если что-то сделали, нужно перезагрузить список читателей
         if result == QMessageBox.Ok:
             self.show_readers()
-    

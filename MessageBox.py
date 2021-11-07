@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
 
+
 def show_error(parent, text):
     dlg = QMessageBox(parent)
     dlg.setWindowTitle("Ошибка")
@@ -7,6 +8,7 @@ def show_error(parent, text):
     dlg.setStandardButtons(QMessageBox.Ok)
     dlg.setIcon(QMessageBox.Critical)
     dlg.exec()
+
 
 def show_warning(parent, text):
     dlg = QMessageBox(parent)
@@ -16,6 +18,7 @@ def show_warning(parent, text):
     dlg.setIcon(QMessageBox.Warning)
     dlg.exec()
 
+
 def show_question(parent, text, title):
     dlg = QMessageBox(parent)
     dlg.setWindowTitle(title)
@@ -24,6 +27,7 @@ def show_question(parent, text, title):
     dlg.setIcon(QMessageBox.Question)
     result = dlg.exec()
     return result
+
 
 def show_info(parent, text, title):
     dlg = QMessageBox(parent)

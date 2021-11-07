@@ -1,4 +1,4 @@
-import sqlite3, datetime
+import sqlite3
 
 from PyQt5 import uic
 from PyQt5.QtCore import QDate  # Импортируем uic
