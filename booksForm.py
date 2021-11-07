@@ -6,11 +6,13 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QWidget, QAbstractIte
 from MessageBox import show_warning
 from bookForm import BookForm
 from readersForm import ReadersForm
+from statForm import StatForm
 
 
 class BooksForm(QWidget):
     book_form = None
     readers_form = None
+    stat_form = None
 
     def __init__(self):
         super().__init__()
@@ -21,6 +23,7 @@ class BooksForm(QWidget):
 
         self.addButton.clicked.connect(self.add_click)
         self.readersButton.clicked.connect(self.readers_click)
+        self.statButton.clicked.connect(self.stat_click)
         self.searchButton.clicked.connect(self.show_books)
         # По нажатию на enter пытаемся искать
         self.titleEdit.returnPressed.connect(self.show_books)
@@ -85,3 +88,7 @@ class BooksForm(QWidget):
     def readers_click(self):
         self.readers_form = ReadersForm()
         self.readers_form.show()
+
+    def stat_click(self):
+        self.stat_form = StatForm()
+        self.stat_form.show()
