@@ -1,9 +1,7 @@
 import sqlite3
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMessageBox, QDialog, QAbstractItemView, QTableWidgetItem
-
-from MessageBox import show_question, show_warning
+from PyQt5.QtWidgets import QDialog, QAbstractItemView, QTableWidgetItem
 
 
 class StatForm(QDialog):

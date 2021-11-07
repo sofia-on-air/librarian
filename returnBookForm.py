@@ -3,7 +3,7 @@ import sqlite3
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMessageBox, QDialog, QAbstractItemView, QTableWidgetItem
 
-from MessageBox import show_question, show_warning
+from MessageBox import show_question
 
 
 class ReturnBookForm(QDialog):

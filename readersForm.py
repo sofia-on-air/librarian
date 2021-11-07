@@ -1,13 +1,10 @@
 import sqlite3
 
 from PyQt5 import QtCore, uic  # Импортируем uic
-from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QWidget, QTableWidget, QAbstractItemView
+from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QWidget, QAbstractItemView
 
 from MessageBox import show_warning
 from readerForm import ReaderForm
-
-# from MessageBox import show_warning
-# from bookForm import BookForm
 
 
 class ReadersForm(QWidget):
